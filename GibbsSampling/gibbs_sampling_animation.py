@@ -55,9 +55,6 @@ def make_gif():
     if not os.path.exists('result'):
         os.mkdir('result')
     files = sorted(glob.glob('gibbs_sampling_plot/gibbs_sampling*.png'), key=numerical_sort)
-    # fileがソートされているか確認
-    # for file in files:
-    #     print(file)
     images = list(map(lambda file: Image.open(file), files))
     images[0].save('result/gibbs_sampling.gif', save_all=True, append_images=images[1:], duration=1000, loop=0)
 

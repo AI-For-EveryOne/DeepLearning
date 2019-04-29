@@ -51,7 +51,9 @@ def bounding_box_positions(imageHeight, imageWidth, box, rotation):
 
     return left, top, width, height
 
-
+'''
+    DataSetフォルダに対象の写真を入れておく
+'''
 def main():
     #boto3のclientを作成し、rekognitionとリージョンを指定
     client = boto3.client('rekognition', 'ap-northeast-1')
@@ -62,7 +64,7 @@ def main():
     target_byte = img_to_byte(target_file)
 
     # 特定したい人の写真
-    source_file = 'DataSet/イメージ 2.jpeg'
+    source_file = 'DataSet/イメージ2.jpeg'
     source_byte = img_to_byte(source_file)
 
     response = client.compare_faces(
@@ -94,6 +96,8 @@ def main():
         image_binary = stream.getvalue()
 
         img = cv2.imread(target_file)
+        if not os.path.exists('result'):
+            os.mkdir('result')
         result_img = 'result/result.jpg'
         x, y, w, h = bounding_box_positions(height, width, box , 'ROTATE_0')
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
