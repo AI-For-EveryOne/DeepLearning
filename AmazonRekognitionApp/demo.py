@@ -7,9 +7,6 @@ import io
 import matplotlib.pyplot as plt
 from PIL import Image
 
-import sys
-sys.setrecursionlimit(5000)
-
 
 SIMILARITY_THRESHOLD = 70
 
